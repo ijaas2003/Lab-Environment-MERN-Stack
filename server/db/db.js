@@ -1,0 +1,224 @@
+const mongoose = require('mongoose');
+const Signin = mongoose.Schema({
+    username:{
+        type:String,
+        require:true,
+    },
+    email:{
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true
+    },
+    data:{
+        type:String,
+        default:Date.now()
+    }
+});
+const FacultyLogin = mongoose.Schema({
+    username:{
+        type:String,
+        require:true
+    },
+    email:{
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true
+    },
+    createdon:{
+        type:Date,
+        default:Date.now
+    },
+    lastlogin:{
+      type:Date,
+      default:Date.now
+    },
+    type:{
+        type:String,
+        default:"Faculty"
+    }
+});
+module.exports = mongoose.model('Facultylogin',FacultyLogin);
+const StudentLogin = mongoose.Schema({
+    rollno:{
+        type:String,
+        require:true,
+    },
+    StudentName:{
+        type:String,
+        require:true,
+    },
+    email:{
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true,
+    },
+    createdon:{
+        type:Date,
+        default:Date.now
+    },
+    lastlogin:{
+        type:Date,
+        default:Date.now
+    },
+});
+module.exports = mongoose.model('Studentlogin',StudentLogin)
+const Student = mongoose.Schema({
+    id:{
+        type:String,
+        require:true,
+    },
+    classid:{
+        type:String,
+        require:true,
+    },
+    createdby: {
+        type:Object,
+        require:true
+    },
+    rollno:{
+        type:Number,
+        require:true
+    },
+    Studentname:{
+        type:String,
+        require:true
+    },
+    
+    type:{
+        type:String,
+        default:"Student"
+    }
+});
+
+const Class = mongoose.Schema({
+    id:{
+        type:String,
+        require:true
+    },
+    facultyid:{
+        type:String,
+        require:true
+    },
+    className:{
+        type:String,
+        require:true
+    },
+    batch:{
+        type:String,
+        require:true
+    },
+    subject:{
+        type:String,
+        require:true
+    },
+    createdOn:{
+        type:Date,
+        default:Date.now
+    },
+    type:{
+        type:String,
+        default:"Class"
+    }
+});
+const Submission = mongoose.Schema({
+    classid:{
+        type:String,
+        require:true
+    },
+    rollno:{
+        type:String,
+        require:true
+    },
+    quesionid:{
+        type:String,
+        require:true
+    },
+    submitt:{
+        type:String,
+        require:true,
+    }
+});
+module.exports = mongoose.model('Submission',Submission);
+const Questions = mongoose.Schema({
+    classid:{
+        type:String,
+        require:true
+    },
+    facultyid:{
+        type:String,
+        require:true
+    },
+    createdOn:{
+        type:Date,
+        default:Date.now
+    },
+    subject:{
+        type:String,
+        require:true
+    },
+    type:{
+        type:String,
+        default:"Question"
+    },
+    problem:{
+        type:String,
+        return:true
+    },
+    SampleInputOne:{
+        type:String,
+        return:true,
+    },
+    SampleInputTwo:{
+        type:String,
+        require:true
+    },
+    SampleOutputOne:{
+        type:String,
+        return:true,
+    },
+    SampleOutputTwo:{
+        type:String,
+        require:true
+    },
+});
+const Answer = mongoose.Schema({
+    record:{
+        type:String,
+        require:true,
+    },
+    queid:{
+        type:String,
+        require:true
+    },
+    code:{
+        type:String,
+        require:true
+    },
+    input:{
+        type:String,
+        require:true
+    },
+    Lang:{
+        type:String,
+        return:true,
+    },
+    rollno:{
+        type:String,
+        return:true
+    }
+})
+module.exports = mongoose.model('Answer',Answer);
+module.exports = mongoose.model('Class',Class);
+module.exports = mongoose.model('Question',Questions);
+module.exports = mongoose.model('Student',Student);
+
+module.exports = mongoose.model("Signin",Signin);
